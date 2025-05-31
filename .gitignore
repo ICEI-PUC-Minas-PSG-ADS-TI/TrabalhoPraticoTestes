@@ -1,3 +1,4 @@
 # IDEs
 *.swp
 *.swo
+/src/codigo/.vs/Trabalho_POO
