@@ -12,13 +12,11 @@ namespace trabalhoPOOList.Tests
     [TestClass()]
     public class ReservaDuzentosTests
     {
-        // Interface simples para o repositório
         private interface IRepositorioReserva
         {
             DadosReserva RecuperarDadosReserva(int capacidadeEspaco);
         }
 
-        // Implementação mock do repositório
         private class RepositorioMock : IRepositorioReserva
         {
             public DadosReserva DadosFicticios { get; set; }
@@ -29,18 +27,14 @@ namespace trabalhoPOOList.Tests
             }
         }
 
-        // Método auxiliar para criar reserva com controle total
         private ReservaDuzentos CriarReservaParaTeste(DadosReserva dadosMock = null)
         {
-            // Cria instância sem chamar construtor padrão
             var reserva = (ReservaDuzentos)FormatterServices.GetUninitializedObject(typeof(ReservaDuzentos));
 
-            // Injeta o mock do repositório
             var repoField = typeof(ReservaDuzentos).GetField("repo",
                 BindingFlags.NonPublic | BindingFlags.Instance);
             repoField?.SetValue(reserva, new RepositorioMock { DadosFicticios = dadosMock });
 
-            // Inicializa propriedades obrigatórias
             reserva.Espaco = new EspacoDuzentos();
 
             if (dadosMock != null)
@@ -50,7 +44,6 @@ namespace trabalhoPOOList.Tests
             }
             else
             {
-                // Inicialização padrão para testes sem dados
                 reserva.QuantidadeDeReservas = 0;
                 Reserva.DataDaUltimaReserva = DateTime.Now;
             }
@@ -62,10 +55,8 @@ namespace trabalhoPOOList.Tests
         [TestMethod()]
         public void Construtor_DeveInicializarComEspacoDuzentos()
         {
-            // Arrange & Act
             var reserva = CriarReservaParaTeste();
 
-            // Assert
             Assert.IsInstanceOfType(reserva.Espaco, typeof(EspacoDuzentos));
             Assert.AreEqual(200, reserva.Espaco.CapacidadeDoEspaco);
         }
@@ -73,16 +64,12 @@ namespace trabalhoPOOList.Tests
         [TestMethod()]
         public void Construtor_SemDadosPrevios_DeveIniciarComDataAtualEZeroReservas()
         {
-            // Arrange
-            // Reseta a data estática antes do teste
             var dataField = typeof(Reserva).GetField("dataDaUltimaReserva",
                 BindingFlags.NonPublic | BindingFlags.Static);
             dataField?.SetValue(null, DateTime.Now);
 
-            // Act
             var reserva = CriarReservaParaTeste();
 
-            // Assert
             Assert.AreEqual(0, reserva.QuantidadeDeReservas);
             Assert.IsTrue((DateTime.Now - Reserva.DataDaUltimaReserva).TotalSeconds < 5);
             var diferenca = (DateTime.Now - Reserva.DataDaUltimaReserva).TotalSeconds;
@@ -97,7 +84,6 @@ namespace trabalhoPOOList.Tests
 
         public void Construtor_ComDadosPrevios_DeveCarregarDadosCorretamente()
         {
-            // Arrange
             var dataMock = new DateTime(2023, 1, 1);
             var dadosMock = new DadosReserva
             {
@@ -106,10 +92,8 @@ namespace trabalhoPOOList.Tests
                 QtdReservas = 5
             };
 
-            // Act
             var reserva = CriarReservaParaTeste(dadosMock);
 
-            // Assert
             Assert.AreEqual(5, reserva.QuantidadeDeReservas);
             Assert.AreEqual(dataMock, Reserva.DataDaUltimaReserva);
         }
@@ -118,13 +102,10 @@ namespace trabalhoPOOList.Tests
         [TestMethod()]
         public void Reservar_PrimeiraReserva_DeveUsarDataDisponivelMaisProxima()
         {
-            // Arrange
             var reserva = CriarReservaParaTeste();
 
-            // Act
             reserva.Reservar();
 
-            // Assert
             Assert.IsTrue(reserva.DataReservada >= DateTime.Now.Date);
             Assert.AreEqual(1, reserva.QuantidadeDeReservas);
         }
@@ -132,17 +113,15 @@ namespace trabalhoPOOList.Tests
         [TestMethod()]
         public void Reservar_MultiplasReservas_DeveAlternarDatasCorretamente()
         {
-            // Arrange
+
             var reserva = CriarReservaParaTeste();
 
-            // Act
             reserva.Reservar();
             var dataReserva1 = reserva.DataReservada;
 
             reserva.Reservar();
             var dataReserva2 = dataReserva1.AddDays(1);
 
-            // Assert
             Assert.AreNotEqual(dataReserva1, dataReserva2);
             Assert.IsTrue(dataReserva2 > dataReserva1);
         }

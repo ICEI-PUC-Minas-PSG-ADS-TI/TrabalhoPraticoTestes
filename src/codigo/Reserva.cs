@@ -10,12 +10,12 @@ namespace Trabalho_POO
 {
     public abstract class Reserva
     {
-        protected RepositorioMongoDB repo = new RepositorioMongoDB();
-        protected static DateTime DataDaUltimaReserva;
-        public DateTime DataReservada { get; protected set; }
-        public Espaco Espaco { get; protected set; }
+        public RepositorioMongoDB repo = new RepositorioMongoDB();
+        public static DateTime DataDaUltimaReserva;
+        public virtual DateTime DataReservada { get; set; }
+        public virtual Espaco Espaco { get;  set; }
 
-        public int QuantidadeDeReservas { get; protected set; }
+        public virtual int QuantidadeDeReservas { get; set; }
 
         // O a primeira data disponível
         // Regra de negócio ( 30 dia após o dia da marcação sexta/sábado).
@@ -48,7 +48,7 @@ namespace Trabalho_POO
             }
             return dataTemp;
         }
-        protected abstract void SetDataReserva();
+        public abstract void SetDataReserva();
 
     }
 }

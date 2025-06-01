@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\macen\\Documents\\puc\\testesaula\\TrabalhoDePOODefinitivo\\TrabalhoDePOODefinitivo\\projeto\\src\\codigo\\Trabalho_POO.csproj": {}
+    "D:\\Users\\vitor\\Documents\\Faculdade\\Faculdade\\5-Periodo\\Teste e Manutenção de Software\\TrabalhoPraticoTestes\\src\\codigo\\Trabalho_POO.csproj": {}
   },
   "projects": {
-    "C:\\Users\\macen\\Documents\\puc\\testesaula\\TrabalhoDePOODefinitivo\\TrabalhoDePOODefinitivo\\projeto\\src\\codigo\\Trabalho_POO.csproj": {
+    "D:\\Users\\vitor\\Documents\\Faculdade\\Faculdade\\5-Periodo\\Teste e Manutenção de Software\\TrabalhoPraticoTestes\\src\\codigo\\Trabalho_POO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\macen\\Documents\\puc\\testesaula\\TrabalhoDePOODefinitivo\\TrabalhoDePOODefinitivo\\projeto\\src\\codigo\\Trabalho_POO.csproj",
+        "projectUniqueName": "D:\\Users\\vitor\\Documents\\Faculdade\\Faculdade\\5-Periodo\\Teste e Manutenção de Software\\TrabalhoPraticoTestes\\src\\codigo\\Trabalho_POO.csproj",
         "projectName": "Trabalho_POO",
-        "projectPath": "C:\\Users\\macen\\Documents\\puc\\testesaula\\TrabalhoDePOODefinitivo\\TrabalhoDePOODefinitivo\\projeto\\src\\codigo\\Trabalho_POO.csproj",
-        "packagesPath": "C:\\Users\\macen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\macen\\Documents\\puc\\testesaula\\TrabalhoDePOODefinitivo\\TrabalhoDePOODefinitivo\\projeto\\src\\codigo\\obj\\",
+        "projectPath": "D:\\Users\\vitor\\Documents\\Faculdade\\Faculdade\\5-Periodo\\Teste e Manutenção de Software\\TrabalhoPraticoTestes\\src\\codigo\\Trabalho_POO.csproj",
+        "packagesPath": "C:\\Users\\Vitor\\.nuget\\packages\\",
+        "outputPath": "D:\\Users\\vitor\\Documents\\Faculdade\\Faculdade\\5-Periodo\\Teste e Manutenção de Software\\TrabalhoPraticoTestes\\src\\codigo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\macen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Vitor\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -62,12 +62,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.33, 6.0.33]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[6.0.33, 6.0.33]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.33, 6.0.33]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.33, 6.0.33]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

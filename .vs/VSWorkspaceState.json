@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\codigo",
+    "\\src\\trabalho_POOTests"
   ],
-  "SelectedNode": "\\C:\\Users\\macen\\Documents\\puc\\testesaula\\TrabalhoDePOODefinitivo\\TrabalhoDePOODefinitivo\\projeto",
+  "SelectedNode": "\\src\\codigo\\Trabalho_POO.sln",
   "PreviewInSolutionExplorer": false
 }

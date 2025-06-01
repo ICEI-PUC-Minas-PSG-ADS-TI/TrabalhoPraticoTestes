@@ -4,21 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace trabalhoPOOList
 {
-    public abstract class Espaco // cria um objeto espaco com atributos comuns para uso das classes derivadas
+    public class Espaco
     {
-        public int CapacidadeDoEspaco { get; protected set; }
-        public double Preco { get; protected set; }
+        public virtual int CapacidadeDoEspaco { get;  set; }
+        public virtual double Preco { get; set; }
 
+        // Construtor antigo, sem parâmetros. É bom mantê-lo para flexibilidade.
         public Espaco()
         {
             this.CapacidadeDoEspaco = 0;
             this.Preco = 0;
         }
 
+        // === ADICIONE ESTE NOVO CONSTRUTOR ===
+        // Ele aceita os parâmetros necessários para criar um Espaco já com valores.
+        public Espaco(double preco, int capacidade)
+        {
+            this.Preco = preco;
+            this.CapacidadeDoEspaco = capacidade;
+        }
     }
-
-   
 }

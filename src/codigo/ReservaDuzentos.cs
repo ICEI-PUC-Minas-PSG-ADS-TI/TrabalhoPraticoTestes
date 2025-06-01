@@ -10,7 +10,7 @@ using trabalhoPOOList;
 namespace trabalhoPOO
 {
 
-    internal class ReservaDuzentos : Reserva
+    public class ReservaDuzentos : Reserva
     {
 
         public ReservaDuzentos()
@@ -37,7 +37,7 @@ namespace trabalhoPOO
 
         // Escolhe realiza o agendamento na data apropriada
         // regra de negócio ( espaço para duzentas pessoas 2 agendamentos por data)
-        protected override void SetDataReserva()
+        public override void SetDataReserva()
         {
             DateTime dataTemp;
 
@@ -58,6 +58,6 @@ namespace trabalhoPOO
             this.QuantidadeDeReservas++;
         }
 
-      
+
     }
 }

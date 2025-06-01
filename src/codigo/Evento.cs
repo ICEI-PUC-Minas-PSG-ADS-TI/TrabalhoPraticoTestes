@@ -8,11 +8,11 @@ namespace Trabalho_POO
 {
     public class Evento
     {
-        public string TipoFesta { get; protected set; }
-        public Dictionary<string, double> DadosUtensilios { get; protected set; }
-        public Comida Comida { get; protected set; }
-        public Bebida Bebida { get; protected set; }
+        public virtual string TipoFesta { get; protected set; }
+        public virtual Dictionary<string, double> DadosUtensilios { get; protected set; }
+        public virtual Comida Comida { get; protected set; }
+        public virtual Bebida Bebida { get; protected set; }
 
-
+        public Evento() { }
     }
 }

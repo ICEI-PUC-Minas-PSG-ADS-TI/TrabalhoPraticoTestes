@@ -36,7 +36,7 @@ namespace trabalhoPOOList
 
         // Escolhe realiza o agendamento na data apropriada
         // regra de negócio ( espaço para cem pessoas 4 agendamentos por data)
-        protected override void SetDataReserva()
+        public override void SetDataReserva()
         {
             DateTime dataTemp;
 

@@ -8,7 +8,7 @@ namespace Trabalho_POO
 {
     public abstract class Comida
     {
-        public Dictionary<string, double> Itens_Comida { get; protected set; }
+        public virtual Dictionary<string, double> Itens_Comida { get; protected set; }
 
         protected abstract Dictionary<string, double> SetDadosSalgados();
     }
