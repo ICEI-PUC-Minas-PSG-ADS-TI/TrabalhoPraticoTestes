@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v6.0": {
       "Trabalho_POO/1.0.0": {
         "dependencies": {
-          "MongoDB.Driver": "2.25.0"
+          "MongoDB.Driver": "2.25.0",
+          "coverlet.collector": "6.0.4"
         },
         "runtime": {
           "Trabalho_POO.dll": {}
@@ -33,6 +34,7 @@
           }
         }
       },
+      "coverlet.collector/6.0.4": {},
       "DnsClient/1.6.1": {
         "dependencies": {
           "Microsoft.Win32.Registry": "5.0.0"
@@ -184,6 +186,13 @@
       "sha512": "sha512-dGCVuVo0CFUKWW85W8YENO+aREf8sCBDjvGbnNvxJuNW4Ss+brEU9ltHhq2KfZze2VUNK1/wygbPG1bmbpyXEw==",
       "path": "awssdk.securitytoken/3.7.100.14",
       "hashPath": "awssdk.securitytoken.3.7.100.14.nupkg.sha512"
+    },
+    "coverlet.collector/6.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lkhqpF8Pu2Y7IiN7OntbsTtdbpR1syMsm2F3IgX6ootA4ffRqWL5jF7XipHuZQTdVuWG/gVAAcf8mjk8Tz0xPg==",
+      "path": "coverlet.collector/6.0.4",
+      "hashPath": "coverlet.collector.6.0.4.nupkg.sha512"
     },
     "DnsClient/1.6.1": {
       "type": "package",

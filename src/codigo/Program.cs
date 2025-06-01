@@ -43,7 +43,7 @@ namespace trabalhoPOOList
         }
 
         // Menu para agendamento de eventos
-        static void MenuAgendamento()
+        public static void MenuAgendamento()
         {
             GerenciadorFesta reserva;
             RepositorioMongoDB repositorio = new RepositorioMongoDB();
@@ -155,7 +155,7 @@ namespace trabalhoPOOList
             }
         }
         // Menu para eventos standard
-        static (int, List<int>) MenuStandard()
+        public static(int, List<int>) MenuStandard()
         {
             List<int> qtdBebidas = new List<int>();
             int qtdParticipantes = 0;
@@ -180,7 +180,7 @@ namespace trabalhoPOOList
 
         }
         // Menu para eventos Luxo
-        static (int, List<int>) MenuLuxo()
+        public static(int, List<int>) MenuLuxo()
         {
             List<int> qtdBebidas = new List<int>();
             int qtdParticipantes = 0;
@@ -208,7 +208,7 @@ namespace trabalhoPOOList
             return (qtdParticipantes, qtdBebidas);
         }
         // Menu para eventos Premier
-        static (int, List<int>) MenuPremier()
+        public static(int, List<int>) MenuPremier()
         {
             List<int> qtdBebidas = new List<int>();
             int qtdParticipantes = 0;
@@ -236,7 +236,7 @@ namespace trabalhoPOOList
             return (qtdParticipantes, qtdBebidas);
         }
         // Menu para eventos livres
-        static int MenuEventoLivre()
+        public static int MenuEventoLivre()
         {
             int qtdParticipantes;
             Console.Write(" Digite a quantidade de participantes : ");
@@ -245,7 +245,7 @@ namespace trabalhoPOOList
             return qtdParticipantes;
         }
         // Captura a quantidade de bebida ate que seja valida
-        static int QuantidadeBebida()
+        public static int QuantidadeBebida()
         {
             bool continuar = true;
             int quantidade = 0;
@@ -264,7 +264,7 @@ namespace trabalhoPOOList
             return quantidade;
         }
         // Captura a quantidade de participantes ate que seja valida
-        static int QuantidadeParticipantes()
+        public static int QuantidadeParticipantes()
         {
             bool continuar = true;
             int quantidade = 0;
@@ -283,7 +283,7 @@ namespace trabalhoPOOList
             return quantidade;
         }
         // Captura a opção do tipo de casamento ate que seja valida
-        static int OpcaoTipoCasamento()
+        public static int OpcaoTipoCasamento()
         {
             bool continuar = true;
             int opcao = 0;
@@ -303,7 +303,7 @@ namespace trabalhoPOOList
             return opcao;
         }
         // Captura a opção do menu inicial ate que seja valida
-        static int OpcaoMenuInicial()
+        public static int OpcaoMenuInicial()
         {
             bool continuar = true;
             int opcao = 0;
@@ -323,7 +323,7 @@ namespace trabalhoPOOList
             return opcao;
         }
         // Exibir os dados do evento escolhido
-        static void ExibirDadosDoEvento(GerenciadorFesta festa)
+        public static void ExibirDadosDoEvento(GerenciadorFesta festa)
         {
             try
             {
@@ -348,7 +348,7 @@ namespace trabalhoPOOList
             }
         }
         // Exibir os dados do evento livre
-        static void ExibirDadosDoEventoLivre(GerenciadorFesta festa)
+        public static void ExibirDadosDoEventoLivre(GerenciadorFesta festa)
         {
             try
             {
@@ -369,7 +369,7 @@ namespace trabalhoPOOList
             }
         }
         // resumo dos utensilios usados
-        static void ResumoUtensilios(GerenciadorFesta festa)
+        public static void ResumoUtensilios(GerenciadorFesta festa)
         {
             try
             {
@@ -391,7 +391,7 @@ namespace trabalhoPOOList
             }
         }
         // resumo das comidas usadas
-        static void ResumoComidas(GerenciadorFesta festa)
+        public static void ResumoComidas(GerenciadorFesta festa)
         {
             try
             {
@@ -409,7 +409,7 @@ namespace trabalhoPOOList
             }
         }
         // resumo das bebidas usadas
-        static void ResumoBebidas(GerenciadorFesta festa)
+        public static void ResumoBebidas(GerenciadorFesta festa)
         {
             try
             {
@@ -428,7 +428,7 @@ namespace trabalhoPOOList
             }
         }
         // resumo dos espacos usados
-        static void ResumoEspaco(GerenciadorFesta festa)
+        public static void ResumoEspaco(GerenciadorFesta festa)
         {
             try
             {
@@ -443,7 +443,7 @@ namespace trabalhoPOOList
             }
         }
         //Exibir reservas efetuadas anteriomente
-        static void ExibirReservas(RepositorioMongoDB repo)
+        public static void ExibirReservas(RepositorioMongoDB repo)
         {
             try
             {

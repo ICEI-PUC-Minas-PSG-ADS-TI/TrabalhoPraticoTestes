@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Gbz3wsQlXco=",
+  "dgSpecHash": "ppyvlEHtJjo=",
   "success": true,
   "projectFilePath": "D:\\Users\\vitor\\Documents\\Faculdade\\Faculdade\\5-Periodo\\Teste e Manutenção de Software\\TrabalhoPraticoTestes\\src\\codigo\\Trabalho_POO.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vitor\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\Vitor\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",
+    "C:\\Users\\Vitor\\.nuget\\packages\\coverlet.collector\\6.0.4\\coverlet.collector.6.0.4.nupkg.sha512",
     "C:\\Users\\Vitor\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
     "C:\\Users\\Vitor\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\2.0.0\\microsoft.extensions.logging.abstractions.2.0.0.nupkg.sha512",
     "C:\\Users\\Vitor\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",

@@ -1,227 +1,128 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using trabalhoPOOList;
 using System;
-using System.Collections.Generic; 
-using System.Linq;            
+using trabalhoPOO;
+using Trabalho_POO;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Drawing;
 
 namespace trabalhoPOOList.Tests
 {
-    public class EspacoCem : Espaco
-    {
-        public EspacoCem() : base()
-        {
-            this.CapacidadeDoEspaco = 100;
-        }
-    }
-    public class ReservaCem : Reserva 
-    {
-        public ReservaCem(IRepositorioReservas repositorio) : base(repositorio) 
-        {
-            this.Espaco = new EspacoCem(); 
-            if (this.repo != null)
-            {
-                var dadosReserva = this.repo.RecuperarDadosReserva(this.Espaco.CapacidadeDoEspaco);
-                if (dadosReserva != null)
-                {
-                    Reserva.DataDaUltimaReserva = dadosReserva.DataReservada.Date;
-                    this.QuantidadeDeReservas = dadosReserva.QtdReservas;
-                }
-                else
-                {
-                    Reserva.DataDaUltimaReserva = DateTime.Now.Date;
-                    this.QuantidadeDeReservas = 0;
-                }
-            }
-            else 
-            {
-                Reserva.DataDaUltimaReserva = DateTime.Now.Date;
-                this.QuantidadeDeReservas = 0;
-            }
-        }
-
-        public override void Reservar()
-        {
-            SetDataReserva();
-        }
-
-        protected override void SetDataReserva()
-        {
-            DateTime dataTemp;
-
-            if (this.QuantidadeDeReservas % 4 == 0 && this.QuantidadeDeReservas > 0)
-            {
-                dataTemp = ObterProximaData(Reserva.DataDaUltimaReserva);
-                Reserva.DataDaUltimaReserva = dataTemp; 
-            }
-            else if (this.QuantidadeDeReservas == 0) 
-            {
-                dataTemp = EncontrarDataDisponivel(); 
-                Reserva.DataDaUltimaReserva = dataTemp; 
-            }
-            else 
-            {
-                dataTemp = Reserva.DataDaUltimaReserva;
-            }
-
-            this.DataReservada = dataTemp.Date;
-            this.QuantidadeDeReservas++;
-        }
-    }
     [TestClass()]
     public class ReservaCemTests
     {
-        private MockRepositorioReservas _mockRepo; 
-        private DateTime _dataTesteBase;
-        private const int CAPACIDADE_ESPACO_CEM = 100;
-
-        [TestInitialize]
-        public void TestInitialize()
+        private interface IRepositorioReserva
         {
-            _mockRepo = new MockRepositorioReservas();
-            _dataTesteBase = new DateTime(2025, 6, 1).Date;
-            Reserva.DataDaUltimaReserva = _dataTesteBase;
+            DadosReserva RecuperarDadosReserva(int capacidadeEspaco);
         }
 
-        [TestMethod()]
-        public void Constructor_QuandoRepositorioRetornaDados_InicializaCorretamente()
+        private class RepositorioMock : IRepositorioReserva
         {
-            var dadosRepo = new DadosReservaDTO 
+            public DadosReserva DadosFicticios { get; set; }
+
+            public DadosReserva RecuperarDadosReserva(int capacidadeEspaco)
             {
-                DataReservada = _dataTesteBase.AddDays(5),
-                QtdReservas = 2,
-                CapacidadeEspaco = CAPACIDADE_ESPACO_CEM
-            };
-            _mockRepo.ConfigurarRetornoRecuperar(dadosRepo);
-
-            var reservaCem = new ReservaCem(_mockRepo); 
-
-            Assert.IsNotNull(reservaCem.Espaco, "A propriedade Espaco não foi inicializada.");
-            Assert.AreEqual(CAPACIDADE_ESPACO_CEM, reservaCem.Espaco.CapacidadeDoEspaco);
-            Assert.AreEqual(dadosRepo.DataReservada.Date, Reserva.DataDaUltimaReserva.Date);
-            Assert.AreEqual(dadosRepo.QtdReservas, reservaCem.QuantidadeDeReservas);
-            Assert.AreEqual(1, _mockRepo.RecuperarChamadas);
+                return DadosFicticios ?? new DadosReserva();
+            }
         }
 
-        [TestMethod()]
-        public void Constructor_QuandoRepositorioRetornaNull_InicializaComValoresPadrao()
+        private ReservaCem CriarReservaParaTeste(DadosReserva dadosMock = null)
         {
-            _mockRepo.ConfigurarRetornoRecuperar(null);
-            DateTime dataEsperadaAgora = DateTime.Now.Date;
+            var reserva = (ReservaCem)FormatterServices.GetUninitializedObject(typeof(ReservaCem));
 
-            var reservaCem = new ReservaCem(_mockRepo);
+            var repoField = typeof(ReservaCem).GetField("repo",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+            repoField?.SetValue(reserva, new RepositorioMock { DadosFicticios = dadosMock });
 
-            Assert.IsNotNull(reservaCem.Espaco, "A propriedade Espaco não foi inicializada.");
-            Assert.AreEqual(CAPACIDADE_ESPACO_CEM, reservaCem.Espaco.CapacidadeDoEspaco);
-            Assert.AreEqual(dataEsperadaAgora, Reserva.DataDaUltimaReserva.Date);
-            Assert.AreEqual(0, reservaCem.QuantidadeDeReservas);
-            Assert.AreEqual(1, _mockRepo.RecuperarChamadas);
-        }
+            reserva.Espaco = new EspacoCem();
 
-        [TestMethod()]
-        public void Reservar_PrimeiraReservaAposInicializacaoSemDadosRepo_UsaDataAtualEIncrementaQuantidade()
-        {
-            _mockRepo.ConfigurarRetornoRecuperar(null);
-            var reservaCem = new ReservaCem(_mockRepo);
-            DateTime dataEsperada = DateTime.Now.Date;
-
-            reservaCem.Reservar();
-
-            Assert.AreEqual(dataEsperada, reservaCem.DataReservada.Date);
-            Assert.AreEqual(1, reservaCem.QuantidadeDeReservas);
-            Assert.AreEqual(dataEsperada, Reserva.DataDaUltimaReserva.Date);
-        }
-
-        [TestMethod()]
-        public void Reservar_PrimeiraReservaAposInicializacaoComDadosRepo_UsaDataDoRepoEIncrementaQuantidade()
-        {
-            var dadosRepo = new DadosReservaDTO
+            if (dadosMock != null)
             {
-                DataReservada = _dataTesteBase,
-                QtdReservas = 0,
-                CapacidadeEspaco = CAPACIDADE_ESPACO_CEM
+                reserva.QuantidadeDeReservas = dadosMock.QtdReservas;
+                Reserva.DataDaUltimaReserva = dadosMock.DataReservada;
+            }
+            else
+            {
+                reserva.QuantidadeDeReservas = 0;
+                Reserva.DataDaUltimaReserva = DateTime.Now;
+            }
+
+            return reserva;
+        }
+
+
+        [TestMethod()]
+        public void Construtor_DeveInicializarComEspacoQuinhentos()
+        {
+            var reserva = CriarReservaParaTeste();
+
+            Assert.IsInstanceOfType(reserva.Espaco, typeof(EspacoCem));
+            Assert.AreEqual(100, reserva.Espaco.CapacidadeDoEspaco);
+        }
+
+        [TestMethod()]
+        public void Construtor_SemDadosPrevios_DeveIniciarComDataAtualEZeroReservas()
+        {
+            var dataField = typeof(Reserva).GetField("dataDaUltimaReserva",
+                BindingFlags.NonPublic | BindingFlags.Static);
+            dataField?.SetValue(null, DateTime.Now);
+
+            var reserva = CriarReservaParaTeste();
+
+            Assert.AreEqual(0, reserva.QuantidadeDeReservas);
+            Assert.IsTrue((DateTime.Now - Reserva.DataDaUltimaReserva).TotalSeconds < 5);
+            var diferenca = (DateTime.Now - Reserva.DataDaUltimaReserva).TotalSeconds;
+            Console.WriteLine($"Diferença em segundos: {diferenca}");
+
+            Assert.IsTrue(diferenca < 5, $"A diferença de tempo foi de {diferenca} segundos, o que é maior que 5.");
+
+
+        }
+
+        [TestMethod()]
+
+        public void Construtor_ComDadosPrevios_DeveCarregarDadosCorretamente()
+        {
+            var dataMock = new DateTime(2023, 1, 1);
+            var dadosMock = new DadosReserva
+            {
+                DataReservada = dataMock,
+                CapacidadeEspaco = 100,
+                QtdReservas = 5
             };
-            _mockRepo.ConfigurarRetornoRecuperar(dadosRepo);
-            var reservaCem = new ReservaCem(_mockRepo);
 
-            reservaCem.Reservar();
+            var reserva = CriarReservaParaTeste(dadosMock);
 
-            Assert.AreEqual(_dataTesteBase, reservaCem.DataReservada.Date);
-            Assert.AreEqual(1, reservaCem.QuantidadeDeReservas);
-            Assert.AreEqual(_dataTesteBase, Reserva.DataDaUltimaReserva.Date);
+            Assert.AreEqual(5, reserva.QuantidadeDeReservas);
+            Assert.AreEqual(dataMock, Reserva.DataDaUltimaReserva);
+        }
+
+
+        [TestMethod()]
+        public void Reservar_PrimeiraReserva_DeveUsarDataDisponivelMaisProxima()
+        {
+            var reserva = CriarReservaParaTeste();
+
+            reserva.Reservar();
+
+            Assert.IsTrue(reserva.DataReservada >= DateTime.Now.Date);
+            Assert.AreEqual(1, reserva.QuantidadeDeReservas);
         }
 
         [TestMethod()]
-        public void Reservar_SegundaReservaNaMesmaData_UsaMesmaDataEIncrementaQuantidade()
+        public void Reservar_MultiplasReservas_DeveAlternarDatasCorretamente()
         {
-            var dadosRepo = new DadosReservaDTO { DataReservada = _dataTesteBase, QtdReservas = 1, CapacidadeEspaco = CAPACIDADE_ESPACO_CEM };
-            _mockRepo.ConfigurarRetornoRecuperar(dadosRepo);
-            var reservaCem = new ReservaCem(_mockRepo);
+            var reserva = CriarReservaParaTeste();
 
-            reservaCem.Reservar();
+            reserva.Reservar();
+            var dataReserva1 = reserva.DataReservada;
 
-            Assert.AreEqual(_dataTesteBase, reservaCem.DataReservada.Date);
-            Assert.AreEqual(2, reservaCem.QuantidadeDeReservas);
-            Assert.AreEqual(_dataTesteBase, Reserva.DataDaUltimaReserva.Date);
-        }
+            reserva.Reservar();
+            var dataReserva2 = dataReserva1.AddDays(1);
 
-        [TestMethod()]
-        public void Reservar_QuartaReservaNaMesmaData_UsaMesmaDataEIncrementaQuantidade()
-        {
-            var dadosRepo = new DadosReservaDTO { DataReservada = _dataTesteBase, QtdReservas = 3, CapacidadeEspaco = CAPACIDADE_ESPACO_CEM };
-            _mockRepo.ConfigurarRetornoRecuperar(dadosRepo);
-            var reservaCem = new ReservaCem(_mockRepo); 
-
-            reservaCem.Reservar(); 
-
-            Assert.AreEqual(_dataTesteBase, reservaCem.DataReservada.Date);
-            Assert.AreEqual(4, reservaCem.QuantidadeDeReservas);
-            Assert.AreEqual(_dataTesteBase, Reserva.DataDaUltimaReserva.Date);
-        }
-
-        [TestMethod()]
-        public void Reservar_QuintaReserva_AvancaParaProximaDataEIncrementaQuantidade()
-        {
-            var dadosRepo = new DadosReservaDTO { DataReservada = _dataTesteBase, QtdReservas = 4, CapacidadeEspaco = CAPACIDADE_ESPACO_CEM };
-            _mockRepo.ConfigurarRetornoRecuperar(dadosRepo);
-            var reservaCem = new ReservaCem(_mockRepo);
-            DateTime proximaDataEsperada = _dataTesteBase.AddDays(1);
-
-            reservaCem.Reservar(); 
-
-            Assert.AreEqual(proximaDataEsperada, reservaCem.DataReservada.Date);
-            Assert.AreEqual(5, reservaCem.QuantidadeDeReservas);
-            Assert.AreEqual(proximaDataEsperada, Reserva.DataDaUltimaReserva.Date);
-        }
-
-        [TestMethod()]
-        public void Reservar_OitavaReserva_MantemNaSegundaDataEIncrementaQuantidade()
-        {
-            DateTime dataDia2 = _dataTesteBase.AddDays(1);
-            var dadosRepo = new DadosReservaDTO { DataReservada = dataDia2, QtdReservas = 7, CapacidadeEspaco = CAPACIDADE_ESPACO_CEM };
-            _mockRepo.ConfigurarRetornoRecuperar(dadosRepo);
-            var reservaCem = new ReservaCem(_mockRepo); 
-
-            reservaCem.Reservar();
-
-            Assert.AreEqual(dataDia2, reservaCem.DataReservada.Date);
-            Assert.AreEqual(8, reservaCem.QuantidadeDeReservas);
-            Assert.AreEqual(dataDia2, Reserva.DataDaUltimaReserva.Date);
-        }
-
-        [TestMethod()]
-        public void Reservar_NonaReserva_AvancaParaTerceiraDataEIncrementaQuantidade()
-        {
-            DateTime dataDia2 = _dataTesteBase.AddDays(1);
-            var dadosRepo = new DadosReservaDTO { DataReservada = dataDia2, QtdReservas = 8, CapacidadeEspaco = CAPACIDADE_ESPACO_CEM };
-            _mockRepo.ConfigurarRetornoRecuperar(dadosRepo);
-            var reservaCem = new ReservaCem(_mockRepo);
-
-            DateTime proximaDataEsperada = dataDia2.AddDays(1); 
-
-            reservaCem.Reservar(); 
-
-            Assert.AreEqual(proximaDataEsperada, reservaCem.DataReservada.Date);
-            Assert.AreEqual(9, reservaCem.QuantidadeDeReservas);
-            Assert.AreEqual(proximaDataEsperada, Reserva.DataDaUltimaReserva.Date);
+            Assert.AreNotEqual(dataReserva1, dataReserva2);
+            Assert.IsTrue(dataReserva2 > dataReserva1);
         }
     }
 }

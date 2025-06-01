@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Trabalho_POO")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd2508cf139233539bd8bb04d179ad298c6b9b4b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6cacc73c3e4f569ff4b6c0e8f5158f01129eb33a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Trabalho_POO")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Trabalho_POO")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

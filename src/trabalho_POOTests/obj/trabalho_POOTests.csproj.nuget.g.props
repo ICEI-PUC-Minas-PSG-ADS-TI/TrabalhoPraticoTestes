@@ -13,6 +13,7 @@
     <SourceRoot Include="C:\Users\Vitor\.nuget\packages\" />
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)reportgenerator\5.4.7\build\netstandard2.0\ReportGenerator.props" Condition="Exists('$(NuGetPackageRoot)reportgenerator\5.4.7\build\netstandard2.0\ReportGenerator.props')" />
     <Import Project="$(NuGetPackageRoot)mstest.testadapter\3.1.1\build\net6.0\MSTest.TestAdapter.props" Condition="Exists('$(NuGetPackageRoot)mstest.testadapter\3.1.1\build\net6.0\MSTest.TestAdapter.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.testplatform.testhost\17.8.0\build\netcoreapp3.1\Microsoft.TestPlatform.TestHost.props" Condition="Exists('$(NuGetPackageRoot)microsoft.testplatform.testhost\17.8.0\build\netcoreapp3.1\Microsoft.TestPlatform.TestHost.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.codecoverage\17.8.0\build\netstandard2.0\Microsoft.CodeCoverage.props" Condition="Exists('$(NuGetPackageRoot)microsoft.codecoverage\17.8.0\build\netstandard2.0\Microsoft.CodeCoverage.props')" />
@@ -21,5 +22,6 @@
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgAWSSDK_Core Condition=" '$(PkgAWSSDK_Core)' == '' ">C:\Users\Vitor\.nuget\packages\awssdk.core\3.7.100.14</PkgAWSSDK_Core>
     <PkgAWSSDK_SecurityToken Condition=" '$(PkgAWSSDK_SecurityToken)' == '' ">C:\Users\Vitor\.nuget\packages\awssdk.securitytoken\3.7.100.14</PkgAWSSDK_SecurityToken>
+    <PkgReportGenerator Condition=" '$(PkgReportGenerator)' == '' ">C:\Users\Vitor\.nuget\packages\reportgenerator\5.4.7</PkgReportGenerator>
   </PropertyGroup>
 </Project>
