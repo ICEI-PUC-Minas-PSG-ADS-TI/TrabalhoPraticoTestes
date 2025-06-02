@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Trabalho_POO.Tests
 {
-    [TestClass()] // Atributo adicionado para a classe ser reconhecida como de teste
+    [TestClass()]
     public class FormaturaLuxoTests
     {
         [TestMethod()]

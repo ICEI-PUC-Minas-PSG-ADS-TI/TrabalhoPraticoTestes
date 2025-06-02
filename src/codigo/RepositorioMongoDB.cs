@@ -10,7 +10,7 @@ namespace Trabalho_POO
 {
     public class RepositorioMongoDB // Classe para manipulação dos dados no BD
     {
-        private readonly ConexaoMongoDb conexaoMongoDb;
+        public readonly ConexaoMongoDb conexaoMongoDb;
 
         public RepositorioMongoDB()
         {

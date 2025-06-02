@@ -124,6 +124,47 @@ namespace Trabalho_POO.Tests
             Assert.AreEqual(esperado, resultado, "O cálculo do valor total para o cenário padrão falhou.");
         }
 
- 
+        [TestMethod()]
+        public void CalcularBebidas_ArgumentoNulo_DeveRetornarZero()
+        {
+            var calculadora = new CalculadoraEventos();
+
+            double resultado = calculadora.CalcularBebidas(null);
+
+            Assert.AreEqual(0.0, resultado, "O cálculo de bebidas com argumento nulo deveria retornar zero.");
+        }
+
+        [TestMethod()]
+        public void CalcularComidas_ArgumentoNulo_DeveRetornarZero()
+        {
+            var calculadora = new CalculadoraEventos();
+
+            double resultado = calculadora.CalcularComidas(null, 10);
+
+            Assert.AreEqual(0.0, resultado, "O cálculo de comidas com argumento nulo deveria retornar zero.");
+        }
+
+
+        [TestMethod()]
+        public void CalcularUtensilios_ArgumentoNulo_DeveRetornarZero()
+        {
+            var calculadora = new CalculadoraEventos();
+            var festa = CriarEventoDeTestePadrao();
+
+            double resultado = calculadora.CalcularUtensilios(festa, null);
+
+            Assert.AreEqual(0.0, resultado, "O cálculo de utensílios com argumento nulo deveria retornar zero.");
+        }
+
+        [TestMethod()]
+        public void CalcularValorTotal_ArgumentosNulos_DeveRetornarZero()
+        {
+            var calculadora = new CalculadoraEventos();
+
+            double resultado = calculadora.CalcularValorTotal(null, 10, null);
+
+            Assert.AreEqual(0.0, resultado, "O cálculo do valor total com argumentos nulos deveria retornar zero.");
+        }
+
     }
 }

@@ -1,12 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Globalization; // For CultureInfo
-using Trabalho_POO; // Assuming GerenciadorFesta and other classes are here
-using trabalhoPOOList; // Your main program's namespace
-using MongoDB.Bson; // For BsonDocument in ExibirReservas test
+using Microsoft.VisualStudio.TestPlatform.Utilities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MongoDB.Bson;
+using Moq;
+using Trabalho_POO;
 
 namespace trabalhoPOOList.Tests
 {
@@ -18,62 +19,41 @@ namespace trabalhoPOOList.Tests
         private TextWriter _originalConsoleOut;
         private TextReader _originalConsoleIn;
 
-        // The user-added interface and its mock.
-        // This is not currently used by Program.ExibirReservas tests as that method
-        // expects a concrete RepositorioMongoDB instance.
-        // This could be used if GerenciadorFesta or other parts of Program are refactored
-        // to use IRepositorioReserva.
-        // Ensure DadosReserva class is defined in your Trabalho_POO project or accessible.
         private interface IRepositorioReserva
         {
             DadosReserva RecuperarDadosReserva(int capacidadeEspaco);
         }
 
-        private class RepositorioMockUser : IRepositorioReserva // Renamed to avoid conflict if you have another RepositorioMock
+        private class RepositorioMockUser : IRepositorioReserva
         {
             public DadosReserva DadosFicticios { get; set; }
 
             public DadosReserva RecuperarDadosReserva(int capacidadeEspaco)
             {
-                // Assuming DadosReserva has a parameterless constructor or is a struct
                 return DadosFicticios ?? new DadosReserva();
             }
         }
-
-        //region Stub for RepositorioMongoDB
-        // This stub is necessary to test Program.ExibirReservas because
-        // Program.ExibirReservas(RepositorioMongoDB repo) takes a concrete class.
-        // For this to work, the methods overridden here (e.g., RecuperarResumosFesta)
-        // MUST be marked as 'virtual' in your actual 'RepositorioMongoDB' class.
         public class TestableRepositorioMongoDBForExibir : RepositorioMongoDB
         {
             public List<BsonDocument> MockResumos { get; set; } = new List<BsonDocument>();
             public bool GuardaDadosResumoCalled { get; private set; } = false;
             public bool GuardaDatasReservadasCalled { get; private set; } = false;
 
-            // Ensure this method is VIRTUAL in your RepositorioMongoDB class
             public List<BsonDocument> RecuperarResumosFesta()
             {
                 return MockResumos;
             }
 
-            // Ensure this method is VIRTUAL in your RepositorioMongoDB class if needed for other tests
             public void GuardaDadosResumo(BsonDocument resumo)
             {
                 GuardaDadosResumoCalled = true;
-                // Optionally store 'resumo' for assertion
-                // base.GuardaDadosResumo(resumo); // Call base if original logic is partially needed
             }
 
-            // Ensure this method is VIRTUAL in your RepositorioMongoDB class if needed for other tests
             public void GuardaDatasReservadas(BsonDocument data)
             {
                 GuardaDatasReservadasCalled = true;
-                // Optionally store 'data' for assertion
-                // base.GuardaDatasReservadas(data); // Call base if original logic is partially needed
             }
         }
-        //endregion
 
         [TestInitialize]
         public void TestInitialize()
@@ -82,6 +62,8 @@ namespace trabalhoPOOList.Tests
             _originalConsoleIn = Console.In;
             _stringWriter = new StringWriter();
             Console.SetOut(_stringWriter);
+
+            Program.IsTestingEnvironment = true;
         }
 
         [TestCleanup]
@@ -91,6 +73,8 @@ namespace trabalhoPOOList.Tests
             Console.SetIn(_originalConsoleIn);
             _stringWriter.Dispose();
             _stringReader?.Dispose();
+
+            Program.IsTestingEnvironment = false;
         }
 
         private void SimulateConsoleInput(string input)
@@ -123,10 +107,10 @@ namespace trabalhoPOOList.Tests
         [TestMethod]
         public void OpcaoMenuInicial_InvalidThenValidInput_ReturnsValid()
         {
-            SimulateConsoleInput("x\n2\n"); // Invalid input "x", then valid "2"
+            SimulateConsoleInput("x\n2\n");
             int result = Program.OpcaoMenuInicial();
             string output = GetConsoleOutput();
-            Assert.IsTrue(output.Contains("Opção 0 inválida")); // Assuming default int value is 0 for failed TryParse
+            Assert.IsTrue(output.Contains("Opção 0 inválida"));
             Assert.AreEqual(2, result);
         }
 
@@ -141,14 +125,10 @@ namespace trabalhoPOOList.Tests
         [TestMethod]
         public void OpcaoTipoCasamento_InvalidParseThenValidInput_ReturnsValid()
         {
-            // This test addresses the case where input is not an integer.
-            // The range validation `opcao < 0 && opcao > 3` in your SUT is logically flawed
-            // (it will always be false) and doesn't cover the full menu range (0-11).
-            // This test focuses on the TryParse part of the validation.
-            SimulateConsoleInput("abc\n1\n"); // Non-integer, then valid
+            SimulateConsoleInput("abc\n1\n");
             int result = Program.OpcaoTipoCasamento();
             string output = GetConsoleOutput();
-            Assert.IsTrue(output.Contains("Opção 0 inválida")); // Assuming default int value 0 for failed TryParse
+            Assert.IsTrue(output.Contains("Opção 0 inválida"));
             Assert.AreEqual(1, result);
         }
 
@@ -167,7 +147,7 @@ namespace trabalhoPOOList.Tests
             SimulateConsoleInput("invalid\n10\n");
             int result = Program.QuantidadeBebida();
             string output = GetConsoleOutput();
-            Assert.IsTrue(output.Contains("Quantidade 0 inválida")); // Default int is 0
+            Assert.IsTrue(output.Contains("Quantidade 0 inválida"));
             Assert.AreEqual(10, result);
         }
 
@@ -179,7 +159,19 @@ namespace trabalhoPOOList.Tests
             Assert.AreEqual(50, result);
         }
 
+        [TestMethod]
+        public void MenuAgendamento_Case0_DisplaysExitMessage()
+        {
+            string simulatedUserInput = "0\n";
+            SimulateConsoleInput(simulatedUserInput);
 
+            Program.MenuAgendamento();
+
+            string output = GetConsoleOutput();
+
+            Assert.IsTrue(output.Contains("Escolha o tipo de reserva desejado"), "Initial menu prompt missing.");
+            Assert.IsTrue(output.Contains("Fim do programa"), "Exit message 'Fim do programa' missing.");
+        }
 
     }
 

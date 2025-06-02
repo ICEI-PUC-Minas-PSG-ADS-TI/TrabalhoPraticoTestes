@@ -11,22 +11,22 @@ using trabalhoPOOList;
 
 namespace Trabalho_POO
 {
-    public class GerenciadorFesta // Classe para gerenciamento de eventos
+    public class GerenciadorFesta
     {
-        
         public Evento GerarTipoFesta { get; protected set; }
         public double ValorTotalComidas { get; private set; }
         public double ValorTotalBebidas { get; private set; }
         public double ValorTotalUtensilios { get; private set; }
         public double ValorTotal { get; private set; }
         public int QuantidadeParticipantes { get; private set; }
-        
+
         public Reserva Reservas;
         private CalculadoraEventos Calculadora;
 
-        public GerenciadorFesta(int quantidadeDeParticipantes, string tipoDeFesta, List<int> quantidadesBebidas)
+        // Construtor principal com injeção de dependência para Reserva
+        public GerenciadorFesta(int quantidadeDeParticipantes, string tipoDeFesta, List<int> quantidadesBebidas, Reserva reserva = null)
         {
-            this.Reservas = InstanciarReserva(quantidadeDeParticipantes);
+            this.Reservas = reserva ?? InstanciarReserva(quantidadeDeParticipantes);
             this.Reservas.Reservar();
             this.QuantidadeParticipantes = quantidadeDeParticipantes;
             this.GerarTipoFesta = InstanciarEvento(tipoDeFesta, quantidadesBebidas);
@@ -37,13 +37,12 @@ namespace Trabalho_POO
             this.ValorTotal = this.Calculadora.CalcularValorTotal(this.GerarTipoFesta, quantidadeDeParticipantes, this.Reservas);
         }
 
-        public GerenciadorFesta(int quantidadeDeParticipantes)
+        public GerenciadorFesta(int quantidadeDeParticipantes, Reserva reserva = null)
         {
-            this.GerarTipoFesta = new EventoLivre();
-            this.Reservas = InstanciarReserva(quantidadeDeParticipantes);
+            this.Reservas = reserva ?? InstanciarReserva(quantidadeDeParticipantes);
             this.Reservas.Reservar();
+            this.GerarTipoFesta = new EventoLivre();
             this.ValorTotal = this.Reservas.Espaco.Preco;
-
         }
 
         // instancia o tipo de evento
@@ -77,17 +76,13 @@ namespace Trabalho_POO
                         throw new ArgumentException("Tipo de festa inválido.");
                 }
             }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine($"Erro: {ex.Message}");
-                return null;
-            }
             catch (Exception ex)
             {
                 Console.WriteLine($"Erro: Ocorreu um erro ao instanciar o evento. Detalhes: {ex.Message}");
-                return null;
+                throw; // Re-lança a exceção para que o chamador possa tratá-la
             }
         }
+
 
         // instancia o tipo de reserva (Espaco com capacidade adequada a quantidade de pessoas)
         private static Reserva InstanciarReserva(int quantidadeDeParticipantes)

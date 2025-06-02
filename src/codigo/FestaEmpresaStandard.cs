@@ -18,7 +18,7 @@ namespace Trabalho_POO
             this.Bebida = new BebidaStandard(quantidadesBebidas);
         }
 
-        protected Dictionary<string, double> SetItens()
+        public Dictionary<string, double> SetItens()
         {
             Dictionary<string, double> dadosItens = new Dictionary<string, double>();
             dadosItens.Add("Música", 20);

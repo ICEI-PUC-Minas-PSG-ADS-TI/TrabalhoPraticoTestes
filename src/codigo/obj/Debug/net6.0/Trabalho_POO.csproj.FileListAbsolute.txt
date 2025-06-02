@@ -151,3 +151,34 @@ D:\Users\vitor\Documents\Faculdade\Faculdade\5-Periodo\Teste e Manutenção de S
 D:\Users\vitor\Documents\Faculdade\Faculdade\5-Periodo\Teste e Manutenção de Software\TrabalhoPraticoTestes\src\codigo\obj\Debug\net6.0\Trabalho_POO.pdb
 D:\Users\vitor\Documents\Faculdade\Faculdade\5-Periodo\Teste e Manutenção de Software\TrabalhoPraticoTestes\src\codigo\obj\Debug\net6.0\Trabalho_POO.genruntimeconfig.cache
 D:\Users\vitor\Documents\Faculdade\Faculdade\5-Periodo\Teste e Manutenção de Software\TrabalhoPraticoTestes\src\codigo\obj\Debug\net6.0\ref\Trabalho_POO.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\Trabalho_POO.exe
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\Trabalho_POO.deps.json
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\Trabalho_POO.runtimeconfig.json
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\Trabalho_POO.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\Trabalho_POO.pdb
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\AWSSDK.Core.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\AWSSDK.SecurityToken.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\DnsClient.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\MongoDB.Bson.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\MongoDB.Driver.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\MongoDB.Driver.Core.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\MongoDB.Libmongocrypt.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\SharpCompress.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\Snappier.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\ZstdSharp.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\runtimes\linux\native\libmongocrypt.so
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\obj\Debug\net6.0\Trabalho_POO.csproj.AssemblyReference.cache
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\obj\Debug\net6.0\Trabalho_POO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\obj\Debug\net6.0\Trabalho_POO.AssemblyInfoInputs.cache
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\obj\Debug\net6.0\Trabalho_POO.AssemblyInfo.cs
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\obj\Debug\net6.0\Trabalho_POO.csproj.CoreCompileInputs.cache
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\obj\Debug\net6.0\Trabalho_POO.sourcelink.json
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\obj\Debug\net6.0\Trabalho.87D807AC.Up2Date
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\obj\Debug\net6.0\Trabalho_POO.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\obj\Debug\net6.0\refint\Trabalho_POO.dll
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\obj\Debug\net6.0\Trabalho_POO.pdb
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\obj\Debug\net6.0\Trabalho_POO.genruntimeconfig.cache
+C:\Users\dtiDigital\Source\Repos\TrabalhoPraticoTestes\src\codigo\obj\Debug\net6.0\ref\Trabalho_POO.dll

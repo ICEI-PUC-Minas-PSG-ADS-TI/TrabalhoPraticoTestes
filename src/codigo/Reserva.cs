@@ -19,7 +19,7 @@ namespace Trabalho_POO
 
         // O a primeira data disponível
         // Regra de negócio ( 30 dia após o dia da marcação sexta/sábado).
-        protected DateTime EncontrarDataDisponivel()
+        public DateTime EncontrarDataDisponivel()
         {
             DateTime dataTemp = new DateTime();
             dataTemp = DateTime.Today.AddDays(30);
@@ -35,7 +35,7 @@ namespace Trabalho_POO
 
         // Encontrar uma data disponível após a primeira data passada
         // Regra de negócio ( se for sexta pula somente um dia, se for sábado pula 6 pa o próximo final de semana)
-        protected DateTime ObterProximaData(DateTime dataTemp)
+        public DateTime ObterProximaData(DateTime dataTemp)
         {
 
             if (dataTemp.DayOfWeek == DayOfWeek.Friday)

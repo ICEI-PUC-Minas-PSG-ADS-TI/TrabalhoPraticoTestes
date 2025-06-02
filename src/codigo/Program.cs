@@ -24,7 +24,10 @@ namespace trabalhoPOOList
                 Console.WriteLine(" Opção 0 : Encerrar Programa");
 
                 opcao = OpcaoMenuInicial();
-                Console.Clear();
+                if (!IsTestingEnvironment) // Add this check here too
+                {
+                    Console.Clear();
+                }
 
                 // Executa a ação correspondente à opção escolhida
                 switch (opcao)
@@ -36,12 +39,15 @@ namespace trabalhoPOOList
                         MenuAgendamento();
                         break;
                     case 0:
+                        Console.WriteLine("Fim do programa");
+                        continuar = false; // This will cause the while loop to terminate
                         break;
                 }
             }
 
         }
 
+        public static bool IsTestingEnvironment { get; set; } = false;
         // Menu para agendamento de eventos
         public static void MenuAgendamento()
         {
@@ -67,13 +73,16 @@ namespace trabalhoPOOList
             Console.WriteLine(" Opção 11 : Evento livre");
             Console.WriteLine(" Opção 0 : Encerrar Programa");
             opcao = OpcaoTipoCasamento();
-            Console.Clear();
+            if (!IsTestingEnvironment) // THIS IS THE CHANGE for line 70
+            {
+                Console.Clear();
+            }
 
             switch (opcao)
             {
                 case 0:
                     Console.WriteLine(" Fim do programa");
-                    Console.ReadKey();
+
                     break;
                 case 1:
                     (qtdConvidados, qtdBebidas) = MenuStandard();
@@ -101,7 +110,7 @@ namespace trabalhoPOOList
                     reserva = new GerenciadorFesta(qtdConvidados, "FestaEmpresaStandard", qtdBebidas);
                     ExibirDadosDoEvento(reserva);
                     repositorio.GuardaDadosResumo(repositorio.ConverterResumoFesta(reserva.GerarResumo()));
-                    repositorio.GuardaDatasReservadas(repositorio.ConverterDadosReservadaEspaco(reserva.GerarDados())); 
+                    repositorio.GuardaDatasReservadas(repositorio.ConverterDadosReservadaEspaco(reserva.GerarDados()));
                     break;
                 case 5:
                     (qtdConvidados, qtdBebidas) = MenuLuxo();
@@ -155,7 +164,7 @@ namespace trabalhoPOOList
             }
         }
         // Menu para eventos standard
-        public static(int, List<int>) MenuStandard()
+        public static (int, List<int>) MenuStandard()
         {
             List<int> qtdBebidas = new List<int>();
             int qtdParticipantes = 0;
@@ -174,13 +183,16 @@ namespace trabalhoPOOList
             qtdBebidas.Add(QuantidadeBebida());
             Console.Write(" Espumante nacional (750ml) : ");
             qtdBebidas.Add(QuantidadeBebida());
-            Console.Clear();
+            if (!IsTestingEnvironment) // <<< ADD THIS CHECK
+            {
+                Console.Clear();
+            }
 
             return (qtdParticipantes, qtdBebidas);
 
         }
         // Menu para eventos Luxo
-        public static(int, List<int>) MenuLuxo()
+        public static (int, List<int>) MenuLuxo()
         {
             List<int> qtdBebidas = new List<int>();
             int qtdParticipantes = 0;
@@ -203,12 +215,15 @@ namespace trabalhoPOOList
             qtdBebidas.Add(QuantidadeBebida());
             Console.Write(" Espumante importado (750ml) : ");
             qtdBebidas.Add(QuantidadeBebida());
-            Console.Clear();
+            if (!IsTestingEnvironment) // <<< ADD THIS CHECK
+            {
+                Console.Clear();
+            }
 
             return (qtdParticipantes, qtdBebidas);
         }
         // Menu para eventos Premier
-        public static(int, List<int>) MenuPremier()
+        public static (int, List<int>) MenuPremier()
         {
             List<int> qtdBebidas = new List<int>();
             int qtdParticipantes = 0;
@@ -231,7 +246,10 @@ namespace trabalhoPOOList
             qtdBebidas.Add(QuantidadeBebida());
             Console.Write(" Espumante importado (750ml) : ");
             qtdBebidas.Add(QuantidadeBebida());
-            Console.Clear();
+            if (!IsTestingEnvironment) // <<< ADD THIS CHECK
+            {
+                Console.Clear();
+            }
 
             return (qtdParticipantes, qtdBebidas);
         }
